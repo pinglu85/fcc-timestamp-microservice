@@ -28,7 +28,9 @@ app.get('/api/timestamp/:date_string?', (req, res) => {
   const dateString = req.params.date_string;
   const parsedDate = Number.isInteger(+dateString)
     ? new Date(+dateString)
-    : new Date(dateString);
+    : dateString
+    ? new Date(dateString)
+    : new Date();
   const unixTime = parsedDate.getTime();
   const resJson = unixTime
     ? { unix: unixTime, utc: parsedDate.toUTCString() }
